@@ -1,0 +1,47 @@
+version: '3.8'
+networks:
+  python_app_db:
+    driver: bridge
+
+services:
+  # mysql database
+  mysql:
+    image: mysql:latest
+    container_name: mysql_db_con
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root1234'
+      MYSQL_DATABASE: python_db
+      MYSQL_USER: python
+      MYSQL_PASSWORD: 'python@123'
+    networks:
+      - python_app_db
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./create_and_insert.sql:/docker-entrypoint-initdb.d/create_and_insert.sql
+    restart: always
+
+  # python application
+  python_app:
+    container_name: python_app_con
+    image: python_application
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '5001:5000'
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root1234'
+      MYSQL_HOST: mysql
+      MYSQL_USER: python
+      MYSQL_PASSWORD: 'python@123'
+      MYSQL_DATABASE: python_db
+    networks:
+      - python_app_db
+    depends_on:
+      - mysql
+    restart: always
+
+volumes:
+  mysql_data:
