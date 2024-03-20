@@ -1,8 +1,4 @@
 version: '3.8'
-networks:
-  python_app_db:
-    driver: bridge
-
 services:
   # mysql database
   mysql:
@@ -16,7 +12,7 @@ services:
       MYSQL_USER: python
       MYSQL_PASSWORD: 'python@123'
     networks:
-      - python_app_db
+      - python_app
     volumes:
       - mysql_data:/var/lib/mysql
       - ./create_and_insert.sql:/docker-entrypoint-initdb.d/create_and_insert.sql
@@ -38,10 +34,15 @@ services:
       MYSQL_PASSWORD: 'python@123'
       MYSQL_DATABASE: python_db
     networks:
-      - python_app_db
+      - python_app
+      - python_db
     depends_on:
       - mysql
     restart: always
-
+networks:
+  python_app:
+    driver: bridge
+  python_db:
+    driver: bridge
 volumes:
   mysql_data:
