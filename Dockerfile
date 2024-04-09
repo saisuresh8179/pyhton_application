@@ -11,7 +11,7 @@ WORKDIR /app
 # Copy the dependencies file to the working directory
 COPY requirements.txt .
 
-RUN pip install Werkzeug==1.*
+#RUN pip install Werkzeug==1.*
 
 # Install any dependencies
 RUN pip install --no-cache-dir -r requirements.txt
