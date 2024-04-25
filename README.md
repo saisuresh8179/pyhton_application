@@ -1,5 +1,4 @@
 --------------------------How to run this application in linux sever----------------------------
-
 -> install python3, python3-pip and install python3.10-venv
 -> Then, create your own venv.
    cmd: python -m venv tutorial-env
