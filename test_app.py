@@ -18,7 +18,7 @@ def test_valid_login(client):
         username='sai',
         password='sai@123'
     ), follow_redirects=True)
-    assert b'Welcome, testuser!' in response.data
+    assert b'Welcome, sai!' in response.data
 
 def test_invalid_login(client):
     """Test invalid login."""
@@ -28,10 +28,10 @@ def test_invalid_login(client):
     ), follow_redirects=True)
     assert b'Invalid username or password' in response.data
 
-def test_dashboard_without_login(client):
-    """Test accessing dashboard without logging in."""
-    response = client.get('/dashboard', follow_redirects=True)
-    assert b'Redirecting...' in response.data
+def test_dashboard_unauthenticated(client):
+    response = client.get('/dashboard')
+    assert response.status_code == 302
+    assert response.headers['Location'] == '/'
 
 def test_logout(client):
     """Test logout functionality."""
