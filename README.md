@@ -1,4 +1,5 @@
 --------------------------How to test and run this python code in linux sever----------------------------
+
 -> install python3, python3-pip and install python3.10-venv
 -> Then, create your own venv.
    cmd: python -m venv tutorial-env
@@ -13,6 +14,7 @@
    cmd: python3 app.py
 
 --------How to test this python code and run this python code in container------------------
+
 -> install python3, python3-pip and install python3.10-venv
 -> Then, create your own venv.
    cmd: python -m venv tutorial-env
