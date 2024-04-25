@@ -1,6 +1,5 @@
 Flask
 mysql-connector-python
 Werkzeug
-secrets
 pytest
 
